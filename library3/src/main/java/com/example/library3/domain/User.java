@@ -1,16 +1,16 @@
 package com.example.library3.domain;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+
 
 @Entity(name="users")
 public class User {
@@ -32,13 +32,8 @@ public class User {
     @Column(name = "role", nullable = false)
     private String role;
     
-    @ManyToMany
-    @JoinTable(
-    name = "users_loans",
-    joinColumns = @JoinColumn(name = "user_id"), 
-    inverseJoinColumns = @JoinColumn(name = "book_id")
-    )
-    private List<Book> loans = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    Collection<BookLoan> loans = new ArrayList<>();
     
     public User() {
     	
@@ -91,6 +86,14 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
 
+	public Collection<BookLoan> getLoans() {
+		return loans;
+	}
+
+	public void setLoans(Collection<BookLoan> loans) {
+		this.loans = loans;
+	}
+
+	
 }

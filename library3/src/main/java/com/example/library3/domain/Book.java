@@ -2,15 +2,16 @@ package com.example.library3.domain;
 
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Book {
@@ -22,8 +23,8 @@ public class Book {
 	private String title;
 	private int published;
 	
-	@ManyToMany
-	private List <User> loaners = new ArrayList<>();
+	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+	private Collection<BookLoan> loans = new ArrayList<>();
 	
 	@ManyToOne
 	@JoinColumn(name="genreid")
@@ -77,9 +78,14 @@ public class Book {
 	public void setGenre(Genre genre) {
 		this.genre = genre;
 	}
-	
-	public void addLoaner(User user) {
-		loaners.add(user);
+
+	public Collection<BookLoan> getLoans() {
+		return loans;
 	}
+
+	public void setLoans(Collection<BookLoan> loans) {
+		this.loans = loans;
+	}
+	
 	
 }
