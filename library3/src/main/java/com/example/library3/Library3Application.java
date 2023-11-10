@@ -39,8 +39,6 @@ public class Library3Application {
 			userRepository.save(user1);
 			userRepository.save(user2);
 			
-			user1.
-			
 			bookRepository.save(book1);
 			bookRepository.save(book2);
 			bookRepository.save(book3);

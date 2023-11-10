@@ -12,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Book {
@@ -20,7 +22,10 @@ public class Book {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	private String author;
+	@NotNull(message = "Title cannot be null.")
+	@Size(min = 2, max = 100)
 	private String title;
+	@NotNull
 	private int published;
 	
 	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL)

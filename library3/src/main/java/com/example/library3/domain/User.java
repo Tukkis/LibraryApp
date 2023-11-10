@@ -10,6 +10,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 @Entity(name="users")
@@ -21,15 +24,18 @@ public class User {
     private Long id;
 
     @Column(name = "username", nullable = false, unique = true)
+    @Size(min = 3, max = 50)
     private String username;
 
     @Column(name = "password", nullable = false)
     private String passwordHash;
 
     @Column(name = "email", nullable = false)
+    @Email
     private String email;
     
     @Column(name = "role", nullable = false)
+    @NotNull
     private String role;
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

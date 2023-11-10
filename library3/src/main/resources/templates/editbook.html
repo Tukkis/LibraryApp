@@ -7,7 +7,7 @@
 <body>
 	<h1>Edit Book</h1>
 	<div>
-		<form th:object="${book}" th:action="@{../save}" action="#" method="post">
+		<form th:object="${book}" th:action="@{../save_edited}" action="#" method="post">
 			<label for="id"></label>
 			<input type="hidden" th:field="*{id}" class="form-control"/>
 			<label for="author">Author</label>
