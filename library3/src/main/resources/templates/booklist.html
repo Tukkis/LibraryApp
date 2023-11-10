@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Booklist</title>
+	<meta http-equiv="Content-Type" charset="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Hello <span sec:authentication="name"></span>!</h1>
+	<form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+    </form>
+	<table class="table table-striped">
+		<tr>
+			<th>Author</th>
+			<th>Title</th>
+			<th>Year</th>
+			<th>Category</th>
+		</tr>
+		<tr th:each = "book: ${books}">
+			<td th:text=${book.author}></td>
+			<td th:text="${book.title}"></td>
+			<td th:text="${book.published}"></td>
+			<td th:text="${book.genre.name}"></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
+			<td><a th:href="@{/edit/{id}(id=${book.id})}">Edit Book</a></td>
+		</tr>
+		<div><a href="/add" class="btn btn-primary">Add Book</a></div>
+	</table>
+</body>
+</html>
