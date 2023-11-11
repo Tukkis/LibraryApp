@@ -17,14 +17,14 @@ public class GenreController {
 	private GenreRepository repository;
 	
 	@RequestMapping("/genrelist")
-	public String gereList(Model model) {
+	public String genreList(Model model) {
 		model.addAttribute("genres",  repository.findAll());
 		return "genrelist";
 	}
 
 
 	@RequestMapping(value = "/addgenre")
-	public String addBook(Model model){
+	public String addGenre(Model model){
 		model.addAttribute("genre", new Genre());
 		return "addgenre";
 	}
@@ -35,13 +35,13 @@ public class GenreController {
 		return "redirect:genrelist";
 	}
 	@RequestMapping(value = "/editgenre/{id}")
-	public String showModBook(@PathVariable("id") Long genreId, Model model){
+	public String showModGenre(@PathVariable("id") Long genreId, Model model){
 		model.addAttribute("genres", repository.findById(genreId));
-		return "editbook";
+		return "editgenre";
 	}
 	
 	@RequestMapping(value = "/deletegenre/{id}", method = RequestMethod.GET)
-	public String deleteBook(@PathVariable("id") Long genreId, Model model) {
+	public String deleteGenre(@PathVariable("id") Long genreId, Model model) {
 		repository.deleteById(genreId);
 		return "redirect:../booklist";
 	}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Editloan</title>
+	<meta http-equiv="Content-Type" charset="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Edit loan</h1>
+	<div>
+		<form th:object="${loan}" th:action="@{save_editedLoan}" action="#" method="post">
+			<div style="clear: both; display: block; height: 10px;"></div>
+				<label for="clist">User</label>
+				<select id="clist" th:field="*{user}" class="from-control">
+					<option th:each="user: ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+				</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<div style="clear: both; display: block; height: 10px;"></div>
+				<label for="clist">Book</label>
+				<select id="clist" th:field="*{book}" class="from-control">
+					<option th:each="book: ${books}" th:value="${book.id}" th:text="${book.title}"></option>
+				</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="loanStart">Start date (yyyy-MM-dd)</label>
+			<input type="text" id="loanStart" th:field="*{loanStart}" />
+			<p th:if="${#fields.hasErrors('loanStart')}" th:errorclass="error" th:errors="*{loanStart}" />
+			<label for="loanEnd">End date (yyyy-MM-dd)</label>
+			<input type="text" id="loanEnd" th:field="*{loanEnd}" />
+			<p th:if="${#fields.hasErrors('loanEnd')}" th:errorclass="error" th:errors="*{loanEnd}" />
+			<input type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>

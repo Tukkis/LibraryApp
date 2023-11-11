@@ -1,11 +1,15 @@
 package com.example.library3;
 
+import java.time.LocalDate;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.example.library3.domain.Book;
+import com.example.library3.domain.BookLoan;
+import com.example.library3.domain.BookLoanRepository;
 import com.example.library3.domain.BookRepository;
 import com.example.library3.domain.Genre;
 import com.example.library3.domain.GenreRepository;
@@ -20,7 +24,7 @@ public class Library3Application {
 	}
 
 	@Bean
-	public CommandLineRunner categorycl(GenreRepository genreRepository, BookRepository bookRepository, UserRepository userRepository) {
+	public CommandLineRunner categorycl(GenreRepository genreRepository, BookRepository bookRepository, UserRepository userRepository, BookLoanRepository bookLoanRepository) {
 		return (args) -> {
 			Genre genre1 = new Genre("scifi");
 			Genre genre2 = new Genre("comic");
@@ -42,6 +46,9 @@ public class Library3Application {
 			bookRepository.save(book1);
 			bookRepository.save(book2);
 			bookRepository.save(book3);
+			
+			BookLoan loan1 = new BookLoan(user1, book1, LocalDate.now().toString(), LocalDate.now().plusDays(7).toString());
+			bookLoanRepository.save(loan1);
 		};
 	}
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface BookLoanRepository extends CrudRepository<BookLoan, Long> {
-	List<BookLoan> findByuser(User user);
-	List<BookLoan> findBybook(Book book);
+public interface BookLoanRepository extends CrudRepository<BookLoan, BookLoanKey> {
+	List<BookLoan> findByUser(User user);
+	List<BookLoan> findByBook(Book book);
 }

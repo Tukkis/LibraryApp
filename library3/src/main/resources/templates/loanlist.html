@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Loanlist</title>
+	<meta http-equiv="Content-Type" charset="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<table class="table table-striped">
+		<tr>
+			<th>User</th>
+			<th>Book</th>
+			<th>Loan start</th>
+			<th>Loan end</th>
+		</tr>
+		<tr th:each = "loan: ${loans}">
+			<td th:text=${loan.user.username}></td>
+			<td th:text="${loan.book.title}"></td>
+			<td th:text="${loan.loanStart}"></td>
+			<td th:text="${loan.loanEnd}"></td>
+		</tr>
+		<div><a href="/addLoan" class="btn btn-primary">Add Loan</a></div>
+	</table>
+</body>
+</html>

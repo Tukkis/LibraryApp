@@ -4,28 +4,39 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
-
-import java.time.LocalDate;
-
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 public class BookLoan {
+	
 	@EmbeddedId
-	private BookLoanKey bookLoanKey = new BookLoanKey();
+	private BookLoanKey id = new BookLoanKey();
 	@ManyToOne
 	@MapsId("userId")
 	private User user;
 	@ManyToOne
 	@MapsId("bookId")
 	private Book book;
-	private LocalDate loanStart;
-	private LocalDate loanEnd;
+	@Pattern(regexp = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$", message="format(yyyy-MM-dd)")
+	private String loanStart;
+	@Pattern(regexp = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$", message="format(yyyy-MM-dd)")
+	private String loanEnd;
+	
+	public BookLoan(User user, Book book, String loanStart, String loanEnd) {
+		super();
+		this.user = user;
+		this.book = book;
+		this.loanStart = loanStart;
+		this.loanEnd = loanEnd;
+	}
+	
+	public BookLoan() {}
 	
 	public BookLoanKey getBookLoanKey() {
-		return bookLoanKey;
+		return id;
 	}
 	public void setBookLoanKey(BookLoanKey bookLoanKey) {
-		this.bookLoanKey = bookLoanKey;
+		this.id = bookLoanKey;
 	}
 	public User getUser() {
 		return user;
@@ -39,16 +50,16 @@ public class BookLoan {
 	public void setBook(Book book) {
 		this.book = book;
 	}
-	public LocalDate getLoanStart() {
+	public String getLoanStart() {
 		return loanStart;
 	}
-	public void setLoanStart(LocalDate loanStart) {
+	public void setLoanStart(String loanStart) {
 		this.loanStart = loanStart;
 	}
-	public LocalDate getLoanEnd() {
+	public String getLoanEnd() {
 		return loanEnd;
 	}
-	public void setLoanEnd(LocalDate loanEnd) {
+	public void setLoanEnd(String loanEnd) {
 		this.loanEnd = loanEnd;
 	}
 	

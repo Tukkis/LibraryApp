@@ -70,10 +70,4 @@ public class BookController {
 		return "redirect:../booklist";
 	}
 	
-	@RequestMapping(value = "/loan/{id}", method = RequestMethod.POST)
-	public String loanBook(Book book){
-		bookRepository.save(book);
-		return "redirect:booklist";
-	}
-	
 }

@@ -15,6 +15,13 @@ public class BookLoanKey implements Serializable  {
 
     @Column(name = "book_id")
     Long bookId;
+    
+    public BookLoanKey(Long userId, Long bookId) {
+    	this.userId = userId;
+    	this.bookId = bookId;
+    }
+    
+    public BookLoanKey() {}
 
 	public Long getUserId() {
 		return userId;
