@@ -54,7 +54,7 @@ public class JPATests {
 	
 	@Test
 	public void findBookById() {
-		List<Book> books = bRepository.findByTitle("Hello World");
+		List<Book> books = bRepository.findByTitle("Kirja1");
 
 		assertThat(books).hasSize(1);
 		assertThat(books.get(0).getAuthor()).isEqualTo("Kirjoittaja1");
@@ -139,7 +139,7 @@ public class JPATests {
 
 	@Test
 	public void createNewLoan() {
-		User user = new User("user2", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo7", "a@b.d", "USER");
+		User user = uRepository.findByUsername("user");
 		Book book = new Book("Kirjoittaja1", "Kirja1", 1991, new Genre("comics"));
 		BookLoan loan = new BookLoan(user, book, LocalDate.now().toString(), LocalDate.now().plusDays(7).toString());
 		blRepository.save(loan);
